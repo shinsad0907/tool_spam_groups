@@ -1,0 +1,12 @@
+{
+  "selectedAccount": "fff",
+  "accounts": [
+    {
+      "uid": "fff",
+      "Status": "Live",
+      "Password": "Không có mật khẩu",
+      "TwoFA": "",
+      "Cookie": ""
+    }
+  ]
+}

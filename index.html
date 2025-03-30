@@ -56,6 +56,30 @@
         flex-direction: column;
         gap: 16px;
       }
+      .search-section-interact {
+        position: relative; /* Tạo bối cảnh cho label */
+        flex: 1; /* Chiếm 50% không gian ngang */
+        max-width: 35%; /* Giới hạn tối đa chiều rộng */
+        padding: 16px; /* Khoảng cách bên trong */
+        background: #0d1117; /* Màu nền */
+        border: 1px solid #30363d; /* Viền */
+        border-radius: 6px; /* Bo góc */
+        height: 100%; /* Chiều cao đầy đủ */
+        box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến chiều cao */
+        margin-top: 24px; /* Khoảng cách phía trên */
+      }
+      .section-label {
+        position: absolute;
+        top: -12px; /* Đẩy label ra ngoài viền trên */
+        left: 16px; /* Khoảng cách từ viền trái */
+        background-color: #0d1117; /* Màu nền đồng nhất với phần bên trong */
+        padding: 0 8px; /* Khoảng cách bên trong của label */
+        font-size: 14px;
+        color: #8b949e; /* Màu chữ nhấn nhá */
+        font-weight: bold;
+        pointer-events: none; /* Không cho phép tương tác với label */
+        z-index: 1; /* Đảm bảo label luôn nằm trên các phần tử khác */
+      }
 
       .keywords-container {
         background: #161b22;
@@ -83,8 +107,14 @@
       .controls-row {
         display: flex;
         justify-content: space-between;
-        align-items: center;
         gap: 24px;
+        margin-top: 16px; /* Khoảng cách phía trên */
+      }
+      .controls-row-interact {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        flex-direction: column;
       }
 
       .account-selector {
@@ -106,7 +136,50 @@
         align-items: center;
         gap: 24px;
       }
+      .search-params-interact {
+        display: flex;
+        gap: 24px;
+        flex-direction: column;
+      }
 
+      .checkbox-group {
+        display: flex;
+        gap: 24px;
+        flex-direction: column;
+      }
+      .checkbox-group label {
+        color: #8b949e;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+      .checkbox-group span.note {
+        color: #f73434;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .param-group-interact {
+        display: flex;
+        gap: 8px;
+        flex-direction: column;
+        margin-left: 16px; /* Tạo khoảng cách từ cạnh trái */
+      }
+
+      .param-group-interact label {
+        color: #8b949e;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+      .link {
+        color: #2ea043; /* Màu xanh lá */
+        text-decoration: underline; /* Gạch chân */
+        cursor: pointer; /* Con trỏ dạng tay */
+      }
+
+      .link:hover {
+        color: #238636; /* Màu đậm hơn khi hover */
+        text-decoration: none; /* Bỏ gạch chân khi hover */
+      }
       .param-group {
         display: flex;
         align-items: center;
@@ -144,7 +217,15 @@
         display: flex;
         gap: 8px;
       }
-
+      .btn-select-content {
+        padding: 6px 16px;
+        background: #234286;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+      }
       .btn-start {
         padding: 6px 16px;
         background: #238636;
@@ -164,6 +245,13 @@
         font-size: 14px;
         cursor: pointer;
       }
+      .btn-start:disabled,
+      .btn-start.disabled {
+          background-color: #6c757d; /* Màu xám nhạt */
+          color: #e6edf3; /* Màu chữ nhạt */
+          cursor: not-allowed; /* Con trỏ không cho phép nhấn */
+          opacity: 0.6; /* Làm mờ nút */
+      }
 
       /* Results Table */
       .results-section {
@@ -172,8 +260,34 @@
         border: 1px solid #30363d;
         border-radius: 6px;
         overflow: auto;
-        overflow-y: auto; /* Cho phép cuộn dọc */
-        max-height: 600px; /* Giới hạn chiều cao của phần kết quả để bật cuộn */
+        max-height: 850px; /* Giới hạn chiều cao của bảng */
+      }
+
+      .results-section-modal-content {
+        margin-top: 25px;
+        background: #0d1117;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        overflow: auto;
+        max-height: 850px; /* Giới hạn chiều cao của bảng */
+      }
+
+      .results-section-interact {
+        flex: 1; /* Chiếm 50% không gian ngang */
+        max-width: 65%; /* Giới hạn tối đa chiều rộng */
+        padding: 16px; /* Khoảng cách bên trong */
+        background: #0d1117; /* Màu nền */
+        border: 1px solid #30363d; /* Viền */
+        border-radius: 6px; /* Bo góc */
+        height: 850px; /* Đảm bảo toàn bộ chiều cao */
+        box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến chiều cao */
+        margin-top: 24px; /* Khoảng cách phía trên */
+        position: relative; /* Tạo bối cảnh cho label */
+      }
+
+      .table-container-spam-stt-groups-page {
+        max-height: 850px; /* Giới hạn chiều cao */
+        overflow: auto; /* Thanh cuộn tự động khi nội dung vượt quá chiều cao */
       }
 
       .results-table {
@@ -303,13 +417,21 @@
       /* Main Content Styles */
       .main-content {
         flex: 1; /* Đảm bảo nội dung full chiều cao */
-        display: none; /* Mặc định bị ẩn */
-        overflow-y: auto; /* Cuộn dọc nếu nội dung quá dài */
+        display: none; /* Sử dụng flex để chia layout */
+        gap: 16px; /* Khoảng cách giữa các phần */
         padding: 16px; /* Khoảng cách bên trong */
+        height: 100%; /* Đảm bảo toàn bộ chiều cao */
+        overflow: hidden; /* Ẩn cuộn cho toàn bộ main-content */
       }
 
       .main-content.active {
         display: block; /* Hiển thị khi được kích hoạt */
+      }
+      .main-content-spamgroups-header {
+        display: flex; /* Sử dụng flex để chia bố cục ngang */
+        gap: 16px; /* Khoảng cách giữa hai phần */
+        flex-wrap: nowrap; /* Không cho các phần xuống hàng */
+        height: 100%; /* Kéo dài đầy đủ chiều cao */
       }
 
       .top-bar {
@@ -411,11 +533,14 @@
 
       /* Additional CSS for specific styling */
       .table-container {
-        margin: 20px;
-        background-color: #0d1117;
-        border-radius: 6px;
-        border: 1px solid #30363d;
-        overflow: auto;
+        max-height: 800px; /* Giới hạn chiều cao tối đa */
+        overflow-y: auto; /* Hiển thị thanh cuộn dọc khi nội dung vượt quá chiều cao */
+        overflow-x: hidden; /* Ẩn thanh cuộn ngang nếu không cần thiết */
+        background-color: #161b22; /* Màu nền */
+        border: 1px solid #30363d; /* Viền */
+        border-radius: 6px; /* Bo góc */
+        padding: 8px; /* Khoảng cách bên trong */
+        box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến kích thước */
       }
 
       .table-container table {
@@ -500,6 +625,62 @@
         background-color: #2f81f7;
         border-color: #2f81f7;
       }
+      .checkboxcontent {
+        width: 16px;
+        height: 16px;
+        background-color: #21262d;
+        border: 1px solid #30363d;
+        border-radius: 4px;
+        appearance: none;
+        cursor: pointer;
+      }
+
+      .checkboxcontent:checked {
+        background-color: #2f81f7;
+        border-color: #2f81f7;
+      }
+      .checkboxmanagerpage {
+        width: 16px;
+        height: 16px;
+        background-color: #21262d;
+        border: 1px solid #30363d;
+        border-radius: 4px;
+        appearance: none;
+        cursor: pointer;
+      }
+
+      .checkboxmanagerpage:checked {
+        background-color: #2f81f7;
+        border-color: #2f81f7;
+      }
+      .scancontent {
+        width: 16px;
+        height: 16px;
+        background-color: #21262d;
+        border: 1px solid #30363d;
+        border-radius: 4px;
+        appearance: none;
+        cursor: pointer;
+      }
+
+      .scancontent:checked {
+        background-color: #2f81f7;
+        border-color: #2f81f7;
+      }
+      .checkboxspamgroups {
+        width: 16px;
+        height: 16px;
+        background-color: #21262d;
+        border: 1px solid #30363d;
+        border-radius: 4px;
+        appearance: none;
+        cursor: pointer;
+      }
+
+      .checkboxspamgroups:checked {
+        background-color: #2f81f7;
+        border-color: #2f81f7;
+      }
 
       /* Thêm CSS cho Modal */
       .modal-overlay {
@@ -524,7 +705,7 @@
         border-radius: 8px;
         border: 1px solid #30363d;
         width: 90%;
-        max-width: 800px;
+        max-width: 1000px;
         color: #c9d1d9;
         position: relative;
       }
@@ -791,6 +972,154 @@
         border-radius: 50%;
         cursor: pointer;
       }
+      .content-cell {
+          cursor: pointer;
+          transition: background-color 0.2s;
+      }
+
+      .content-cell:hover {
+          background-color: #f5f5f5;
+      }
+
+      .input-group label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: bold;
+      }
+
+      .text-input {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 14px;
+      }
+
+      textarea.text-input {
+          resize: vertical;
+          min-height: 80px;
+      }
+      /* Tab Header */
+      .tab-header {
+        display: flex;
+        border-bottom: 1px solid #30363d;
+      }
+
+      .tab-item {
+        flex: 1;
+        padding: 12px 16px;
+        text-align: center;
+        background: #161b22;
+        color: #c9d1d9;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.2s;
+      }
+
+      .tab-item.active {
+        background: #1a2432;
+        color: #ffffff;
+        border-bottom: 2px solid #2f81f7;
+      }
+
+      .tab-item:hover {
+        background: #1a2432;
+      }
+
+      /* Tab Content */
+      .tab-content {
+        padding: 16px;
+        background: #0d1117;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+      }
+
+      .tab-panel {
+        display: none;
+      }
+
+      .tab-panel.active {
+        display: block;
+      }
+      /* Rectangle Box Styles */
+      .rectangle-box {
+        padding: 16px;
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        margin-bottom: 16px; /* Khoảng cách giữa các ô */
+      }
+
+      .rectangle-box.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      /* Radio Button Group */
+      /* Radio Button Group */
+      .param-group {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Khoảng cách giữa radio button và label */
+        margin-bottom: 4px; /* Giảm khoảng cách giữa radio button và nội dung bên dưới */
+      }
+
+      .param-group label {
+        color: #c9d1d9;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .param-group input[type="radio"] {
+        cursor: pointer;
+      }
+
+      /* Input and Select Styles */
+      .input-label {
+        display: block;
+        color: #8b949e;
+        font-size: 14px;
+      }
+
+      .text-input,
+      .select-input,
+      .number-input {
+        width: 100%;
+        padding: 8px 12px;
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        color: #e6edf3;
+        font-size: 14px;
+        margin-bottom: 6px; /* Giảm khoảng cách dưới input/select */
+      }
+      .context-menu {
+        display: none;
+        position: absolute;
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        z-index: 1000;
+        padding: 8px 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .context-menu ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .context-menu li {
+        padding: 8px 16px;
+        color: #c9d1d9;
+        cursor: pointer;
+      }
+
+      .context-menu li:hover {
+        background: #30363d;
+      }
     </style>
   </head>
   <body>
@@ -802,16 +1131,23 @@
         </div>
 
         <div class="nav-section">
-          <div class="nav-header">CÁC CHỨC NĂNG</div>
+          <div class="nav-header">Quản lí tài khoản</div>
           <a href="#" class="nav-item active" id="manageAccountsLink"
             >Quản lý tài khoản quét</a
           >
           <a href="#" class="nav-item" id="managePagesLink"
             >Quản lý cookie Page</a
           >
-          <a href="#" class="nav-item">Khôi phục Facebook trực tiếp</a>
         </div>
-
+        <div class="nav-section">
+          <div class="nav-header">Quản lí tài khoản VIA(new)</div>
+          <a href="#" class="nav-item active" id="manageAccountsLink"
+            >Quản lý tài khoản VIA(new)</a
+          >
+          <a href="#" class="nav-item" id="managePagesLink"
+            >Quản lý cookie Page VIA(new)</a
+          >
+        </div>
         <div class="nav-section">
           <div class="nav-header">QUÉT DATA</div>
           <a href="#" class="nav-item" id="scanPageLink">Quét PAGE</a>
@@ -819,8 +1155,25 @@
             >Quét Fanpage theo từ khóa</a
           >
           <!-- Link mới -->
-          <a href="#" class="nav-item">Quét data profile</a>
-          <a href="#" class="nav-item">Quét data bài viết</a>
+          <!-- <a href="#" class="nav-item">Quét data bài viết</a> -->
+        </div>
+        <div class="nav-section">
+          <div class="nav-header">TƯƠNG TÁC DATA</div>
+          <a href="#" class="nav-item" id="SpamPageGroupsLink"
+            >Spam đăng bài groups bằng PAGE</a
+          >
+          <a href="#" class="nav-item" id="SpamPageGroupsLink"
+            >Spam đăng reels bằng PAGE(new)</a
+          >
+        </div>
+        <div class="nav-section">
+          <div class="nav-header">Reup Video Content</div>
+          <a href="#" class="nav-item" id="scancontent"
+            >Quét content(new)</a
+          >
+          <a href="#" class="nav-item" id="SpamPageGroupsLink"
+            >Reup Video(new)</a
+          >
         </div>
       </div>
 
@@ -996,11 +1349,11 @@
                 <option value="all">Tất cả tài khoản</option>
               </select>
               <div class="btn-group">
-                <button class="btn-secondary" id="exportAccountsBtn">
+                <button class="btn-secondary" id="exportdatapagesBtn">
                   🔄 Xuất tài khoản
                 </button>
                 <!-- Nút Xóa mới -->
-                <button class="btn-danger" id="deleteAccountsBtn">
+                <button class="btn-danger" id="deletedataPagesBtn">
                   🗑️ Xóa tài khoản
                 </button>
               </div>
@@ -1020,7 +1373,7 @@
                     <input
                       type="checkbox"
                       class="checkbox"
-                      id="selectAllCheckbox"
+                      id="selectAllCheckboxmanagerpage"
                     />
                   </th>
                   <th>#</th>
@@ -1051,7 +1404,365 @@
             <div class="table-footer">Showing 1 to 1 of 1 entries</div>
           </div>
         </div>
+        <!-- Search Content Section -->
+        <div class="main-content" id="searchContent">
+          <!-- Header Section -->
+          <div class="top-bar">
+            <h1>Quản lý Quét và Tải Video</h1>
+            <div class="top-bar-actions">
+              <img src="/api/placeholder/24/24" alt="Settings" class="icon" />
+              <img src="/api/placeholder/32/32" alt="Profile" class="profile-icon" />
+            </div>
+          </div>
+        
+          <!-- Tab Navigation -->
+          <div class="tab-header">
+            <button class="tab-item active" id="tabScanVideo">Quét Video</button>
+            <button class="tab-item" id="tabDownloadVideo">Tải Video</button>
+          </div>
+          <div id="contextMenu" class="context-menu">
+            <ul>
+              <li id="copyLink">Copy Link</li>
+              <li id="deleteRow">Xóa</li>
+              <li id="saveLink">Lưu link video</li>
+            </ul>
+          </div>
+        
+          <!-- Tab Content -->
+          <div class="tab-content">
+            <!-- Quét Video Content -->
+            <div class="tab-panel active" id="scanVideoContent">
+              <div class="main-content-spamgroups-header">
+                <!-- Cấu hình Quét Video -->
+                <div class="search-section-interact">
+                  <label class="section-label">Cấu Hình Quét Video</label>
+                  <div class="controls-row-interact">
+                    <!-- Quét theo từ khóa -->
+                    <div class="param-group" style="margin-bottom: 16px;">
+                      <label>
+                        <input type="radio" name="scanMode" id="keywordMode" checked />
+                        Quét theo từ khóa
+                      </label>
+                    </div>
+                    <div class="rectangle-box" id="keywordBox">
+                      <label for="platformSelect" class="input-label">Chọn nền tảng:</label>
+                      <select id="platformSelect" class="select-input">
+                        <option value="youtube">YouTube</option>
+                        <option value="tiktok">TikTok</option>
+                        <option value="facebook">Facebook</option>
+                      </select>
+                      <label for="keywordInput" class="input-label">Quét theo từ khóa:</label>
+                      <input type="text" id="keywordInput" class="text-input" placeholder="Nhập từ khóa..." />
+                      <label for="keywordLimit" class="input-label">Số lượng quét:</label>
+                      <input type="number" id="keywordLimit" class="number-input" value="10" />
+                    </div>
+                
+                    <!-- Quét theo kênh -->
+                    <div class="param-group" style="margin-bottom: 16px;">
+                      <label>
+                        <input type="radio" name="scanMode" id="channelMode" />
+                        Quét theo kênh
+                      </label>
+                    </div>
+                    <div class="rectangle-box disabled" id="channelBox">
+                      <label for="platformSelectChannel" class="input-label">Chọn nền tảng:</label>
+                      <select id="platformSelectChannel" class="select-input">
+                        <option value="youtube">YouTube</option>
+                        <option value="tiktok">TikTok</option>
+                        <option value="facebook">Facebook</option>
+                      </select>
+                      <label for="channelInput" class="input-label">Quét theo kênh:</label>
+                      <input type="text" id="channelInput" class="text-input" placeholder="Nhập URL hoặc ID kênh..." />
+                      <label for="keywordLimit" class="input-label">Số lượng quét:</label>
+                      <input type="number" id="keywordLimitChannel" class="number-input" value="10" />
+                    </div>
+                
+                    <div class="param-group" style="margin-top: 16px;">
+                      <label for="saveLocation" class="input-label">Chọn nơi lưu link:</label>
+                      <input type="text" id="saveLocation" class="text-input" placeholder="Nhập đường dẫn lưu..." readonly />
+                      <button id="browseFolder">📂 Chọn thư mục</button>
+                    </div>
+                    
+                    <button class="btn-start" id="startScancontentBtn">Bắt đầu Quét</button>
+                  </div>
+                </div>
+        
+                <!-- Danh sách Link -->
+                <div class="results-section-interact">
+                  
+                  <label class="section-label">Danh sách Link</label>
+                  <div class="table-container">
+                    <table class="results-table">
+                      <thead>
+                        <tr>
+                          <th>
+                            <input
+                              type="checkbox"
+                              class="checkbox"
+                              id="Checkbox-scan-content-all"
+                            />
+                          </th>
+                          <th>#</th>
+                          <th>Link Video</th>
+                          <th>Tiêu đề</th>
+                          <th>Lượt xem/cảm xúc</th>
+                          <th>Người đăng</th>
+                          <th>Ngày tạo</th>
+                        </tr>
+                      </thead>
+                      <tbody id="linkListTbody">
+                        <!-- Danh sách link sẽ được thêm vào đây -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Tải Video Content -->
+            <div class="tab-panel" id="downloadVideoContent">
+              <div class="main-content-spamgroups-header">
+                <!-- Cấu hình Tải Video -->
+                <div class="search-section-interact">
+                  <label class="section-label">Cấu Hình Tải Video</label>
+                  <div class="controls-row-interact">
+                    <!-- Số luồng chạy đồng thời -->
+                    <div class="param-group" style="margin-bottom: 16px;">
+                      <label>Số luồng chạy đồng thời:</label>
+                      <div class="number-input-group">
+                        <input type="number" id="downloadThreads" class="number-input" value="5" />
+                        <span class="unit">luồng</span>
+                      </div>
+                    </div>
+            
+                    <!-- Tổng số link video -->
+                    <div class="param-group" style="margin-bottom: 16px;">
+                      <label>Tổng số link video:</label>
+                      <span id="totalVideoLinks">0</span>
+                    </div>
+            
+                    <!-- Button chọn link video -->
+                    <div class="param-group" style="margin-bottom: 16px;">
+                      <button class="btn-start" id="selectVideoLinksBtn">Chọn Link Video</button>
+                    </div>
+            
+                    <!-- Chọn đường dẫn lưu file -->
+                    <div class="param-group" style="margin-top: 16px;">
+                      <label for="saveLocationDownload" class="input-label">Chọn nơi lưu file:</label>
+                      <input type="text" id="saveLocationDownload" class="text-input" placeholder="Nhập đường dẫn lưu..." readonly />
+                      <button id="browseFolderDownload">📂 Chọn thư mục</button>
+                    </div>
+            
+                    <!-- Button bắt đầu tải -->
+                    <button class="btn-start" id="startDownloadBtn">Bắt đầu Tải</button>
+                  </div>
+                </div>
+            
+                <!-- Danh sách Video -->
+                <div class="results-section-interact">
+                  <label class="section-label">Danh sách Video Tải</label>
+                  <div class="table-container">
+                    <table class="results-table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Link Video</th>
+                          <th>Tiêu đề</th>
+                          <th>Trạng thái</th>
+                          <th>Đường dẫn lưu</th>
+                        </tr>
+                      </thead>
+                      <tbody id="videoDownloadListTbody">
+                        <!-- Danh sách video sẽ được thêm vào đây -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <div class="main-content" id="spamsttgroupsPages">
+          <!-- Header Section -->
+          <div class="top-bar">
+            <h1>Spam đăng bài lên nhóm bằng Page</h1>
+            <div class="top-bar-actions">
+              <img src="/api/placeholder/24/24" alt="Settings" class="icon" />
+              <img
+                src="/api/placeholder/32/32"
+                alt="Profile"
+                class="profile-icon"
+              />
+            </div>
+          </div>
+          <div class="controls-row">
+            <div class="search-params">
+              <div class="action-buttons">
+                <button class="btn-select-content" id="btn-select-content">
+                  Select content
+                </button>
+              </div>
+              <div class="stats" id="content-stats">
+                <div>Tổng nọi dung chọn đăng: <span>0</span></div>
+              </div>
+            </div>
+            <div class="search-params">
+              <div class="account-selector">
+                <select class="select-input" id="scanGroupsSelectspamgroups">
+                  <option value="">Chọn danh mục Pages</option>
+                </select>
+              </div>
+              <div class="action-buttons">
+                <button class="btn-start" id="bnt-spam-stt-groups">
+                  Bắt đầu
+                </button>
+                <button class="btn-stop">Dừng</button>
+              </div>
+            </div>
+          </div>
+          <div class="main-content-spamgroups-header">
+            <!-- Search Controls Section -->
+
+            <div class="search-section-interact">
+              <label class="section-label">Cấu hình đăng bài vào nhóm</label>
+              <!-- Keywords Input -->
+              <!-- <div class="keywords-container">
+                <textarea
+                  id="keywords-input"
+                  class="keywords-input"
+                  placeholder="Nhập từ khóa tìm kiếm (mỗi dòng một từ khóa)..."
+                ></textarea>
+              </div> -->
+
+              <!-- Controls Row -->
+              <div class="controls-row-interact">
+                <!-- <div class="account-selector">
+                  <select class="select-input" id="scanGroupsSelect">
+                    <option value="">Chọn danh mục tài khoản quét</option>
+                  </select>
+                </div> -->
+
+                <div class="search-params-interact">
+                  <div class="param-group">
+                    <label>Số luồng chạy đồng thời</label>
+                    <div class="number-input-group">
+                      <input type="number" value="100" class="number-input" />
+                      <span class="unit">luồng</span>
+                    </div>
+                  </div>
+
+                  <div class="param-group">
+                    <label>Tất cả tài khoản đăng tối đa</label>
+                    <div class="number-input-group">
+                      <input type="number" value="2" class="number-input" />
+                      <span class="unit">/nhóm</span>
+                    </div>
+                  </div>
+
+                  <div class="param-group">
+                    <label>Chuyển tài khoản sau đăng</label>
+                    <div class="number-input-group">
+                      <input type="number" value="2" class="number-input" />
+                      <span class="unit">/nhóm</span>
+                    </div>
+                  </div>
+
+                  <div class="param-group">
+                    <label>Khoảng cách 2 lần đăng bài</label>
+                    <div class="number-input-group">
+                      <input type="number" value="2" class="number-input" />
+                      <input type="number" value="2" class="number-input" />
+                      <span class="unit">/giấy</span>
+                    </div>
+                  </div>
+
+                  <div class="param-group-interact">
+                    <label class="toggle-item">
+                      <input
+                        type="radio"
+                        name="input-type"
+                        class="radio"
+                        checked
+                      />
+                      <span>Đăng theo danh sách ID Nhóm</span>
+                      <a class="link">Vui lòng nhập UID Group tại đây!</a>
+                    </label>
+                    <label class="toggle-item">
+                      <input type="radio" name="input-type" class="radio" />
+                      <span
+                        >Đăng vào nhóm đã tham gia của Page ( chưa update
+                        )</span
+                      >
+                    </label>
+                  </div>
+                  <div class="checkbox-group">
+                    <label class="toggle-item">
+                      <input type="checkbox" class="checkbox" />
+                      <span>Lấy bài đăng ngẫu nhiên để đăng</span>
+                      <span class="note"> (không khuyến khích dùng) </span>
+                    </label>
+                    <label class="toggle-item">
+                      <input type="checkbox" class="checkbox" />
+                      <span>Không đăng trùng nhóm</span>
+                    </label>
+                    <label class="toggle-item">
+                      <input type="checkbox" class="checkbox" />
+                      <span>Không đăng trùng bài viết giữa các Page</span>
+                      <span class="note"> (không khuyến khích dùng) </span>
+                    </label>
+                    <label class="toggle-item">
+                      <input type="checkbox" class="checkbox" />
+                      <span>Cho phép tự động tham gia nhóm chưa tham gia</span>
+                      <span class="note"> (không khuyến khích dùng) </span>
+                    </label>
+                    <label class="toggle-item">
+                      <input type="checkbox" class="checkbox" />
+                      <span>Kèm ảnh background khi đăng trạng thái</span>
+                    </label>
+                    <label class="toggle-item">
+                      <input type="checkbox" class="checkbox" />
+                      <span>Chờ upload ảnh</span>
+                      <div class="number-input-group">
+                        <input type="number" value="2" class="number-input" />
+                        <span class="unit">giấy</span>
+                        <span class="note">
+                          ( video càng dài thì càng để delay càng cao)
+                        </span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Footer Actions -->
+
+            <div class="results-section-interact">
+              <label class="section-label">Danh sách Page</label>
+              <div class="table-container-spam-stt-groups-page">
+                <table class="results-table">
+                  <thead>
+                    <tr>
+                      <th>
+                        <input
+                          type="checkbox"
+                          class="checkbox"
+                          id="Checkbox-spam-stt-groups"
+                        />
+                      </th>
+                      <th>#</th>
+                      <th>Name Page</th>
+                      <th>UID PAGE</th>
+                      <th>Trạng thái</th>
+                      <th>Thành Công</th>
+                    </tr>
+                  </thead>
+                  <tbody id="results-tbody-spam-groups"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Main Content -->
         <div class="main-content" id="Scangroupsbykeywords">
           <!-- Header Section -->
@@ -1306,11 +2017,74 @@
         </div>
       </div>
     </div>
+    <!-- Thêm Modal -->
+    <div class="modal-overlay" id="select-content">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 class="modal-title">Select content</h2>
+          <button class="close-button" id="close-select-content">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="controls-row">
+            <div class="account-selector">
+              <select class="select-input" id="contentselect">
+                <option value="">Chọn danh mục tài khoản quét</option>
+              </select>
+            </div>
+            <div class="search-params">
+              <div class="action-buttons">
+                <button class="btn-start" id="save-chosse-content">
+                  Save lựa chọn
+                </button>
+                <button
+                  class="btn-start"
+                  id="save-chosse-content-or-groups-content"
+                  style="display: none"
+                >
+                  Save content và groups content
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="results-section-modal-content">
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      class="checkbox"
+                      id="selectAllContent"
+                    />
+                  </th>
+                  <th>#</th>
+                  <th>Nội dung</th>
+                  <th>Link ảnh/video</th>
+                </tr>
+                <!-- <td>shinsad</td> -->
+              </thead>
+              <tbody id="results-tbody-content"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" id="bnt-add-content">
+            Thêm Content
+          </button>
+          <button class="btn-primary" id="bnt-add-groups-content">
+            Thêm Nhóm Content
+          </button>
+        </div>
+      </div>
+    </div>
     <!-- ... Previous head content ... -->
     <script src="./src/keyValidator.js"></script>
     <script src="./src/accountsManager.js"></script>
     <script src="./src/scangroups.js"></script>
     <script src="./src/scanpage.js"></script>
     <script src="./src/pagesmanager.js"></script>
+    <script src="./src/spamsttgroupspage.js"></script>
+    <script src="./src/selectcontent.js"></script>
+    <script src="./src/scancontent.js"></script>
   </body>
 </html>
